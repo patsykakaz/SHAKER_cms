@@ -1,0 +1,279 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+<!doctype html>
+<html lang="fr">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="keywords" content="">
+<meta name="description" content="Accueil">
+<title>SHAKER</title>
+<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'css/bootstrap.override.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<link rel="stylesheet" href="{% static 'css/temp.css' %}">
+
+</head>
+
+<body>
+
+<div id='upperNav' class=''></div>
+
+<div class="text-center">
+    <div class='sideBar-layer'>
+        <div class='sideBar-top'></div>
+        <div class='sideBar-bottom'></div>
+    </div>
+    <img id='logo' src='img/logo.png' alt='logo'/>
+    <div class='sideBar-layer'>
+        <div class='sideBar-top'></div>
+        <div class='sideBar-bottom'></div>
+    </div>
+</div>
+
+<div id='layer-navbar' class='container'>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+    <!-- <a class="navbar-brand" href="#" style='padding: 0'><img src='img/logo.jpg' style='max-height: 60px'/></a> -->
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+            <li><a href="#"><i class='fa fa-home fa-lg'></i> ACCUEIL</a>
+            </li>
+            <li><a href="#"><i class='fa fa-paper-plane fa-lg'></i> NEWS <span class="sr-only">(current)</span></a>
+            </li>
+            <li><a><i class='fa fa-flask fa-lg'></i> SHAKERPEDIA</a>
+            </li>
+            <li><a><i class='fa fa-globe fa-lg'></i> BARS DU MONDE</a>
+            </li>
+        </ul>
+        <ul id='search' class="nav navbar-nav navbar-right">
+            <li class='text-center' style='min-width: 70px;background-color:rgb(80,80,100)'><a id='test' style='color: white'><i class='fa fa-search-plus fa-2x'></i></a>
+            </li>
+            <li>
+            <form  id='test-click' class="navbar-form hide" role="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-default">Submit</button>
+            </form>
+            </li>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+</div>
+
+<div class='container'>
+    <div id='main' class='col-md-9 pubOn'>
+        <div class='col-md-8 item double-item'>
+            <div class='item-primary-layer'>
+                <div class='layer-img'>
+                    <img src='{% static 'img/test/2.jpg'%}' />
+                </div>
+                <div class='item-caption'>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum corrupti sit ea, sunt dolorem? Delectus enim impedit,
+                </div>
+                <div class='arrow'></div>
+            </div>
+            <div class='item-secondary-layer text-center'>
+                <div class='secondary-caption'>
+                    <i class='fa fa-plus-circle fa-3x'></i> 
+                </div>
+            </div>
+        </div>
+        <div class='col-md-4 item triple-item pull-right'>
+            <div class='item-primary-layer'>
+                <div class='layer-img'>
+                    <img src='{% static 'img/test/6.jpg'%}' />
+                </div>
+                <div class='item-caption'>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum corrupti.
+                </div>
+                <div class='arrow'></div>
+            </div>
+            <div class='item-secondary-layer text-center'>
+                <div class='secondary-caption'>
+                    <i class='fa fa-plus-circle fa-3x'></i> 
+                </div>
+            </div>
+        </div>
+        <div id='shakerpedia' class='col-md-8 text-center pull-left'>
+            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="_">
+        </div>
+        <div class='col-md-4 item double-item'>
+            <div class='item-primary-layer'>
+                <div class='layer-img'>
+                    <img src='{% static 'img/test/1.jpg'%}' />
+                </div>
+                <div class='item-caption'>
+                    Lorem ipsum dolor sit amet, consectetur 
+                </div>
+                <div class='arrow'></div>
+            </div>
+            <div class='item-secondary-layer text-center'>
+                <div class='secondary-caption'>
+                    <i class='fa fa-plus-circle fa-3x'></i> 
+                </div>
+            </div>
+        </div>
+        <div class='col-md-4 item double-item'>
+            <div class='item-primary-layer'>
+                <div class='layer-img'>
+                    <img src='{% static 'img/test/3.jpg'%}' />
+                </div>
+                <div class='item-caption'>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum corrup
+                </div>
+                <div class='arrow'></div>
+            </div>
+            <div class='item-secondary-layer text-center'>
+                <div class='secondary-caption'>
+                    <i class='fa fa-plus-circle fa-3x'></i> 
+                </div>
+            </div>
+        </div>
+        <div class='col-md-4 item half-item'>
+            <div class='item-primary-layer'>
+                <div class='item-caption'>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </div>
+            </div>
+        </div>
+        <div class='col-md-4 item'>
+            <div class='item-primary-layer'>
+                <div class='layer-img'>
+                    <img src='{% static 'img/test/5.jpg'%}' />
+                </div>
+                <div class='item-caption'>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </div>
+                <div class='arrow'></div>
+            </div>
+            <div class='item-secondary-layer text-center'>
+                <div class='secondary-caption'>
+                    <i class='fa fa-plus-circle fa-3x'></i> 
+                </div>
+            </div>
+        </div>
+        <div class='col-md-8 item double-item pull-right'>
+            <div class='item-primary-layer'>
+                <div class='layer-img'>
+                    <img src='{% static 'img/test/6.jpg'%}' />
+                </div>
+                <div class='item-caption'>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum
+                </div>
+                <div class='arrow'></div>
+            </div>
+            <div class='item-secondary-layer text-center'>
+                <div class='secondary-caption'>
+                    <i class='fa fa-plus-circle fa-3x'></i> 
+                </div>
+            </div>
+        </div>
+
+        <div class='col-md-4 item'>
+            <div class='item-primary-layer'>
+                <div class='layer-img'>
+                    <img src='{% static 'img/test/2.jpg'%}' />
+                </div>
+                <div class='item-caption'>
+                    Lorem ipsum dolor sit amet sunt dolorem? Delectus enim impedit,
+                </div>
+                <div class='arrow'></div>
+            </div>
+            <div class='item-secondary-layer text-center'>
+                <div class='secondary-caption'>
+                    <i class='fa fa-plus-circle fa-3x'></i> 
+                </div>
+            </div>
+        </div>
+        <div class='col-md-4 item pull-left'>
+            <div class='item-primary-layer'>
+                <div class='layer-img'>
+                    <img src='{% static 'img/test/1.jpg'%}' />
+                </div>
+                <div class='item-caption'>
+                    Lorem ipsum dolor sit amet, sunt dolorem? Delectus enim impedit,
+                </div>
+                <div class='arrow'></div>
+            </div>
+            <div class='item-secondary-layer text-center'>
+                <div class='secondary-caption'>
+                    <i class='fa fa-plus-circle fa-3x'></i> 
+                </div>
+            </div>
+        </div>
+        <div class='col-md-8 item triple-item pull-right'>
+            <div class='item-primary-layer'>
+                <div class='layer-img'>
+                    <img src='{% static 'img/test/4.jpg'%}' />
+                </div>
+                <div class='item-caption'>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </div>
+                <div class='arrow'></div>
+            </div>
+            <div class='item-secondary-layer text-center'>
+                <div class='secondary-caption'>
+                    <i class='fa fa-plus-circle fa-3x'></i> 
+                </div>
+            </div>
+        </div>
+
+        <div class='col-md-4 item half-item'>
+            <div class='item-primary-layer'>
+                <div class='item-caption'>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                </div>
+            </div>
+        </div>
+        <div class='col-md-4 item pull-left'>
+            <div class='item-primary-layer'>
+                <div class='layer-img'>
+                    <img src='{% static 'img/test/1.jpg'%}' />
+                </div>
+                <div class='item-caption'>
+                    Lorem ipsum dolor sit amet, sunt dolorem? Delectus enim impedit,
+                </div>
+                <div class='arrow'></div>
+            </div>
+            <div class='item-secondary-layer text-center'>
+                <div class='secondary-caption'>
+                    <i class='fa fa-plus-circle fa-3x'></i> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id='pub' class='col-md-3'>
+        <img src='http://formatxxl.fr/static/media/publicite/FESPA_2015-245x260-Format-XXl_FR.GIF' />
+        <img src='http://www.groupembc.com/static/media/couvertures/SHAKER_b8Uik5u.jpg' />
+        <img src='http://formatxxl.fr/static/img/couverture.jpg' />
+    </div>
+
+
+</div>
+
+
+<footer id='footer'><footer>
+
+</body>
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+</html>
+
