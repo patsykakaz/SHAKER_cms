@@ -1,11 +1,4 @@
 $(window).load(function(){
-    i = 1;
-    $('.col-md-4').not('triple-item').not('half-item').each(function(){
-        if(i % 5 == 0){
-            $(this).addClass('item-dark');
-        }
-        i+=1;
-    });
 
     $('.secondary-caption').each(function(){
         $(this).css('margin-top', ($(this).parent('.item-secondary-layer').outerHeight()-$(this).outerHeight())/2);

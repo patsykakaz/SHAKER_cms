@@ -1,65 +1,120 @@
-{% extends "base.html" %}
-{% load i18n future mezzanine_tags blog_tags keyword_tags disqus_tags %}
+{% extends "blog/blog_base.html" %}
 
-{% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Blog" %}{% endif %}{% endblock %}
+{% load i18n future mezzanine_tags blog_tags keyword_tags disqus_tags pages_tags staticfiles %}
 
-{% block meta_keywords %}{% metablock %}
-{% keywords_for page as keywords %}
-{% for keyword in keywords %}
-    {% if not forloop.first %}, {% endif %}
-    {{ keyword }}
-{% endfor %}
-{% endmetablock %}{% endblock %}
-
-{% block meta_description %}{% metablock %}
-{{ page.description }}
-{% endmetablock %}{% endblock %}
-
-{% block title %}
-{% if page %}
-{% editable page.title %}{{ page.title }}{% endeditable %}
-{% else %}
-{% trans "Blog" %}
-{% endif %}
-{% endblock %}
-
-{% block breadcrumb_menu %}
-{{ block.super }}
+{% block blog_main %}
 {% if tag or category or year or month or author %}
-<li>{% spaceless %}
-{% if tag %}
-    {% trans "Tag:" %} {{ tag }}
-{% else %}{% if category %}
-    {% trans "Category:" %} {{ category }}
-{% else %}{% if year or month %}
-    {% if month %}{{ month }}, {% endif %}{{ year }}
-{% else %}{% if author %}
-    {% trans "Author:" %} {{ author.get_full_name|default:author.username }}
-{% endif %}{% endif %}{% endif %}{% endif %}
-{% endspaceless %}
-</li>
-{% endif %}
-{% endblock %}
-
-{% block main %}
-
-{% if tag or category or year or month or author %}
-    {% block blog_post_list_filterinfo %}
-    <p>
-    {% if tag %}
-        {% trans "Viewing posts tagged" %} {{ tag }}
-    {% else %}{% if category %}
-        {% trans "Viewing posts for the category" %} {{ category }}
-    {% else %}{% if year or month %}
-        {% trans "Viewing posts from" %} {% if month %}{{ month }}, {% endif %}
-        {{ year }}
-    {% else %}{% if author %}
-        {% trans "Viewing posts by" %}
-        {{ author.get_full_name|default:author.username }}
-    {% endif %}{% endif %}{% endif %}{% endif %}
-    {% endblock %}
-    </p>
+    {% for blog_post in blog_posts.object_list %}
+        {% if forloop.counter0 == 0 %}
+        <a href="{{ blog_post.get_absolute_url }}">
+            <div class='col-md-12 item triple-item'>
+        {% else %}
+        <a href="{{ blog_post.get_absolute_url }}">
+            <div class='col-md-4 item double-item'>
+        {% endif %}
+                <div class='item-primary-layer'>
+                    <div class='layer-img'>
+                        <img src='{{ MEDIA_URL }}{%  thumbnail blog_post.featured_image 300 200 %}' />
+                    </div>
+                    <div class='item-caption'>
+                        {{ blog_post.title }}
+                    </div>
+                    <div class='arrow'></div>
+                </div>
+                <div class='item-secondary-layer text-center'>
+                    <div class='secondary-caption'>
+                        <i class='fa fa-plus-circle fa-3x'></i> 
+                    </div>
+                </div>
+            </div>
+        </a>
+    {% endfor %}
 {% else %}
+    {% for blog_post in blog_posts.object_list %}
+        {% if forloop.counter0 == 0 %}
+        <div class='col-md-8 col-sm-8 col-xs-12'>
+            <div class='box bigbox'>
+                <div class='layer-img'>
+                    <div class='item-category'>
+                        {% with blog_post.categories.all as categories %}
+                        {% if categories %}
+                        {% for category in categories %}
+                        <a href="{% url "blog_post_list_category" category.slug %}">{{ category }}</a>{% if not forloop.last %} | {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    <a href="{{ blog_post.get_absolute_url }}"><img class='illustration' src='{{ MEDIA_URL }}{%  thumbnail blog_post.featured_image 610 400 %}' /></a>
+        {% elif forloop.counter0 < 3 %}
+        <div class='col-md-4 col-sm-4 col-xs-6'>
+            <div class='box smallbox'>
+                <div class='layer-img'>
+                    <div class='item-category'>
+                        {% with blog_post.categories.all as categories %}
+                        {% if categories %}
+                        {% for category in categories %}
+                        <a href="{% url "blog_post_list_category" category.slug %}">{{ category }}</a>{% if not forloop.last %} | {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    <a href="{{ blog_post.get_absolute_url }}"><img class='illustration' src='{{ MEDIA_URL }}{%  thumbnail blog_post.featured_image 300 200 %}' /></a>
+        {% elif forloop.counter0 == 3 %}
+        <div class='col-md-8 col-sm-8 col-xs-12' style='float: right'>
+            <div class='box bigbox'>
+                <div class='layer-img'>
+                    <div class='item-category'>
+                        {% with blog_post.categories.all as categories %}
+                        {% if categories %}
+                        {% for category in categories %}
+                        <a href="{% url "blog_post_list_category" category.slug %}">{{ category }}</a>{% if not forloop.last %} | {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    <a href="{{ blog_post.get_absolute_url }}"><img class='illustration' src='{{ MEDIA_URL }}{%  thumbnail blog_post.featured_image 610 400 %}' /></a>
+        {% elif forloop.counter0 > 3 %}
+        <div class='col-md-4 col-sm-4 col-xs-6'>
+            <div class='box smallbox'>
+                <div class='layer-img'>
+                    <div class='item-category'>
+                        {% with blog_post.categories.all as categories %}
+                        {% if categories %}
+                        {% for category in categories %}
+                        <a href="{% url "blog_post_list_category" category.slug %}">{{ category }}</a>{% if not forloop.last %} | {% endif %}
+                        {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+                    </div>
+                    <a href="{{ blog_post.get_absolute_url }}"><img class='illustration' src='{{ MEDIA_URL }}{%  thumbnail blog_post.featured_image 300 200 %}' /></a>
+        {% endif %}
+                </div>
+                <a href="{{ blog_post.get_absolute_url }}">
+                <div class='item-caption'>
+                    <h3>{{ blog_post.title|lower|capfirst }}</h3>
+                    {% if blog_post.agence%}
+                    <h4>
+                        Agence : {{ blog_post.agence|upper }}
+                    </h4>
+                    {% endif %}
+                    {% if blog_post.annonceur  %}
+                    <h4>
+                        Annonceur : {{ blog_post.annonceur|upper }}
+                    </h4>
+                    {% endif %}
+                    {% if blog_post.societe %}
+                    <h4>
+                        Societe : {{ blog_post.societe|upper }}
+                    </h4>
+                    {% endif %}
+                </div>
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}
+
+{% if not tag and not category and not year and not month and not author %}
     {% if page %}
     {% block blog_post_list_pagecontent %}
     {% if page.get_content_model.content %}
@@ -71,7 +126,7 @@
     {% endif %}
 {% endif %}
 
-{% for blog_post in blog_posts.object_list %}
+{% for blog_post in blog_posts.object_listXXX %}
 {% block blog_post_list_post_title %}
 {% editable blog_post.title %}
 <h2>
@@ -145,15 +200,8 @@
 </div>
 {% endblock %}
 {% endfor %}
-
-{% pagination_for blog_posts %}
-
-{% if settings.COMMENTS_DISQUS_SHORTNAME %}
-{% include "generic/includes/disqus_counts.html" %}
-{% endif %}
-
+<div class='text-right'>
+{# {% pagination_for blog_posts %} #}
+</div>
 {% endblock %}
 
-{% block right_panel %}
-{% include "blog/includes/filter_panel.html" %}
-{% endblock %}
