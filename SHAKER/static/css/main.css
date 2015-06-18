@@ -1,0 +1,245 @@
+@charset "UTF-8";
+/*
+    grey -> rgb(130,130,160);
+    yellow -> rgb(244,176,39);
+*/
+
+body{
+    background-color: rgb(235,235,238);
+}
+
+footer{
+    min-height: 80px;
+    margin-top: 80px;
+    background-color: rgb(225,225,230);
+}
+
+#layer-navbar{
+    margin-top: 50px;
+}#layer-navbar.pubOn{
+    margin-top: 150px;
+}
+.sideBar-layer{
+    display: inline-block;
+    width: 30%;
+}
+.sideBar-top{
+    height: 40px;
+    margin-bottom: 10px;
+    border-bottom: 2px solid white;
+}.sideBar-bottom{
+    border-top: 2px solid white;
+}
+#logo{
+    width: 30%;
+}
+
+#pubLayer{
+    position: absolute;
+    width: 100%;
+    min-height: 1250px;
+    margin: auto;
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+
+
+
+#main{
+    position: relative;
+    z-index: 19;
+    /*overflow: hidden;*/
+    margin-bottom: 50px;
+    background-color: white;
+    line-height: 25px;
+    letter-spacing: 1px;
+}
+
+#main img{
+    max-width: 100%;
+    max-height: 500px;
+}
+
+.item{
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+    background-color: white;
+    -moz-transition: all 0.3s ease;
+    -webkit-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}.item:hover{
+    z-index: 999999;
+    box-shadow: 0 0 1px 2px rgba(0,0,0,.15);
+}.pubOn .item{
+    height: 200px;
+}
+.half-item{
+    height: 150px;
+    border: 2px dashed rgb(244,176,39);
+    background-color: white;
+    color: rgb(244,176,39);
+    font-weight: bold;
+}.half-item:hover{
+    box-shadow: none;
+}.pubOn .half-item{
+    height: 100px;
+}
+.half-item .item-secondary-layer, .half-item .layer-img{
+    display: none;
+}
+.double-item{
+    height: 450px;
+}.pubOn .double-item{
+    height: 300px;
+}
+.triple-item{
+    height: 600px;
+}.pubOn .triple-item{
+    height: 400px;
+}
+
+.item-dark:hover{
+    box-shadow: 0 0 1px 2px rgba(0,0,0,.7);
+}
+.item-dark .item-caption{
+    background-color: rgb(80,80,100);
+    color: white;
+}.item-dark .item-secondary-layer, .pubOn .item-dark .item-secondary-layer{
+    background-color: rgba(80,80,100,.6);
+    color: white;
+}
+
+.item-primary-layer{
+}
+.item-secondary-layer{
+    position: absolute;
+    top: -150px;
+    height: 150px;
+    width: 100%;
+    background-color: rgba(255,255,255,.7);
+    /*color: rgb(130,130,160);*/
+    color: white;
+    transition: all .3s ease-in-out;
+}.pubOn .item-secondary-layer{
+    position: absolute;
+    top: -100px;
+    height: 100px;
+    width: 100%;
+    background-color: rgba(255,255,255,.8);
+    color: rgb(130,130,160);
+    transition: all .3s ease-in-out;
+}
+
+.half-item .item-secondary-layer{
+    height: 150px;
+    top: -150px;
+}
+.double-item .item-secondary-layer{
+    height: 300px;
+    top: -300px;
+}.pubOn .double-item .item-secondary-layer{
+    height: 200px;
+    top: -200px;
+}
+
+.triple-item .item-secondary-layer{
+    height: 450px;
+    top: -450px;
+}.pubOn .triple-item .item-secondary-layer{
+    height: 300px;
+    top: -300px;
+}
+
+.item:hover .item-secondary-layer{
+    top: 0px;
+}
+.half-item:hover .item-secondary-layer{
+    bottom: 150px;
+}
+.double-item:hover .item-secondary-layer{
+    top: 0px;
+}
+.triple-item:hover .item-secondary-layer{
+    top: 0px;
+}
+
+.layer-img{
+    overflow: hidden;
+    height: 150px;
+}.layer-img img{
+    position: relative;
+    min-width: 100%;
+    min-height: 100%;
+    transition: all .3s ease-in-out;
+}
+.item:hover .layer-img img{
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
+}
+.pubOn .item .layer-img{
+    height: 100px;
+}
+.half-item .layer-img{
+    height: 0px;
+}
+.double-item .layer-img{
+    height: 300px;
+}.pubOn .double-item .layer-img{
+    height: 200px;
+}
+.triple-item .layer-img{
+    height: 450px;
+}.pubOn .triple-item .layer-img{
+    height: 300px;
+}
+
+
+
+
+
+.item-caption{
+    position: relative;
+    z-index: 9;
+    height: 150px;
+    padding: 25px;
+}
+
+.secondary-caption i{
+    position: relative;
+    top: 4px;
+    left: 0px;
+    transition: all .75s linear;
+}
+
+
+.arrow{
+    position: relative;
+    left: 8%;
+    width: 30px;
+    height: 20px;
+    background-image: url('../img/white-arrow.png');
+    background-repeat: no-repeat;
+    transition: all .2s linear;
+}
+.pubOff .arrow{
+    top: -165px;
+}
+.pubOn .arrow{
+    top: -115px;
+}
+.item-dark .arrow{
+    background-image: url('../img/grey-arrow.png');
+}
+.item:hover .arrow{
+    left: -100px;
+    transition: all .5s linear;
+}
+
+/* 
+    TEMP
+*/

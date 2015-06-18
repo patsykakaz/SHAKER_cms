@@ -1,0 +1,28 @@
+@charset "UTF-8";
+/*
+    grey -> rgb(130,130,160);
+    lightGrey -> rgb(235,235,238);
+    yellow -> rgb(244,176,39);
+*/
+
+.habillageOn{
+
+    padding: 15px;
+    margin-top: 150px;
+    background-color: rgb(235,235,238);
+}
+.habillageOn #layer-navbar{
+    margin: 0;
+}
+.habillageOn .navbar{
+    /*min-height: 20px;*/
+    /*margin-bottom: 0;*/
+}
+
+#sidePub{
+    padding-right: 0;
+}
+#sidePub img{
+    width: 100%;
+    margin-bottom: 15px;
+}
