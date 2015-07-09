@@ -8,7 +8,7 @@
             <div class='col-md-8 item double-item'>
                 <div class='item-primary-layer'>
                     <div class='layer-img'>
-                        <img src='{{ MEDIA_URL }}{%  thumbnail blog_post.featured_image 300 400 %}' />
+                        <img src='{{ MEDIA_URL }}{%  thumbnail blog_post.featured_image 550 550 %}' />
                     </div>
                     <div class='item-caption'>
                         {{ blog_post.title }}
@@ -26,10 +26,11 @@
             <div class='col-md-4 item triple-item pull-right'>
                 <div class='item-primary-layer'>
                     <div class='layer-img'>
-                        <img src='{{ MEDIA_URL }}BarDuMonde/{%  thumbnail last_bar_du_monde.illustration 400 200 %}' />
+                        <img src='{{ MEDIA_URL }}{%  thumbnail last_bar_du_monde.illustration.url 250 300 %}' />
                     </div>
                     <div class='item-caption'>
-                        EMPLACEMENT BAR DU MONDE
+                        <h5>LES PLUS BEAUX BARS DU MONDE</h5>
+                        {{ last_bar_du_monde.title|capfirst }} 
                     </div>
                     <div class='arrow'></div>
                 </div>
@@ -60,8 +61,7 @@
                     col-md-8 triple-item pull-right
                 {% elif forloop.counter > 8 %}
                     col-md-4 pull-left
-                {% endif %} 
-            '>
+                {% endif %}'>
                 <div class='item-primary-layer'>
                     <div class='layer-img'>
                          <img src='{{ MEDIA_URL }}{%  thumbnail blog_post.featured_image 300 400 %}' />

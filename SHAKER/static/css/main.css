@@ -13,6 +13,10 @@ footer{
     margin-top: 80px;
     background-color: rgb(225,225,230);
 }
+h1,h2,h3,h4,h5,h6{
+    font-family: 'Fjalla One', sans-serif;
+    color: rgb(244,176,39);
+}
 
 #layer-navbar{
     margin-top: 50px;
@@ -36,6 +40,7 @@ footer{
 
 #pubLayer{
     position: absolute;
+    z-index: 1;
     width: 100%;
     min-height: 1250px;
     margin: auto;
@@ -43,12 +48,16 @@ footer{
     background-position: center top;
 }
 
-
+#content_container{
+    position: relative;
+    z-index: 2;
+}
 
 #main{
     position: relative;
     z-index: 19;
     /*overflow: hidden;*/
+    padding: 20px;
     margin-bottom: 50px;
     background-color: white;
     line-height: 25px;
@@ -56,8 +65,13 @@ footer{
 }
 
 #main img{
+    display: block;
     max-width: 100%;
     max-height: 500px;
+    padding: 30px 0 30px 0;
+    margin: auto;
+}#main .layer-img img{
+    padding: 0;
 }
 
 .item{
@@ -243,3 +257,19 @@ footer{
 /* 
     TEMP
 */
+
+
+#content_container .img_responsive_layer{
+    position: relative;
+    width: 100%;
+    max-height: 220px;
+    overflow: hidden;
+}
+#content_container .img_responsive{
+    width: 100%;
+    margin: auto;
+}
+#content_container .img-thumbnail{
+    padding: 4px;
+    border-radius: 0;
+}

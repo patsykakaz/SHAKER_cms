@@ -13,22 +13,23 @@
 <link rel="stylesheet" href="{% static 'css/bootstrap.override.css' %}">
 <link rel="stylesheet" href="{% static 'css/main.css' %}">
 <link rel="stylesheet" href="{% static 'css/temp.css' %}">
+<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 {% if pub %}<link rel="stylesheet" href="{% static 'css/pub.css' %}">{% endif %}
-<!-- <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"> -->
-
+{% block extra_css %}{% endblock %}
 </head>
 
 <body>
 
 {% if habillage != 'empty' %}
-    {% if habillage.lien != '' %}
+    {% if habillage.lien %}
         <a href="{{ habillage.lien }}" target="blank"><div id='pubLayer' style="background-image: url('{{ MEDIA_URL }}publicite/{{ habillage.media }}');"></div></a>
     {% else %}
-        <a target="blank"><div id='pubLayer' style="background-image: url('{{ MEDIA_URL }}publicite/{{ habillage.media }}');"></div></a>
+        <div id='pubLayer' style="background-image: url('{{ MEDIA_URL }}publicite/{{ habillage.media }}');"></div>
     {% endif %}
 {% endif %}
 
-<div class='container {% if habillage %}habillageOn{% endif %}'>
+<div id='content_container' class='container {% if habillage %}habillageOn{% endif %}'>
     <div class="text-center">
         <div class='sideBar-layer'>
             <div class='sideBar-top'></div>
@@ -57,29 +58,10 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                <li>
-                    <a href="/articles/category/news/">
-                    NEWS <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <li><a href='/articles/category/bar-de-france/'>BAR DE FRANCE</a></li>
-                <li><a href='/articles/category/portrait-de-barman/'>PORTRAIT DE BARMAN</a></li>
-                <li><a href='/bar-du-monde/'>BARS DU MONDE</a></li>
-                <li><a>SHAKERPEDIA</a></li>
-            </ul>
-            <ul id='search' class="nav navbar-nav navbar-right">
-                <li class='text-center' style='min-width: 70px;background-color:rgb(80,80,100)'><a id='test' style='color: white'><i class='fa fa-search-plus fa-2x'></i></a>
-                </li>
-                <li>
-                <form  id='test-click' class="navbar-form hide" role="search">
-                    <div class="form-group">
-                      <input type="text" class="form-control" placeholder="Search">
-                    </div>
-                    <button type="submit" class="btn btn-default">Submit</button>
-                </form>
-                </li>
-            </ul>
+<div class="navbar-collapse collapse">
+    {# {% search_form "all" %} #}
+    {% page_menu "pages/menus/dropdown.html" %}
+</div>
         </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>

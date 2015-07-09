@@ -12,10 +12,33 @@ from .models import *
 def processor_home(request,page):
     try: 
         blog_post_list = BlogPost.objects.all()
-        last_bar_du_monde = BarDuMonde.objects.last()
+        last_bar_du_monde = BarDuMonde.objects.latest('date_derniere_visite')
         couv = last_bar_du_monde.illustration.url.split('/')
         last_bar_du_monde.illustration = couv[-1]
-    except:
-        print('no BlogPost or BarDuMonde')
+    except DoesNotExist:
+        print('FUCK')
+        print('no BlogPost or BarDuMondex')
     return locals()
 
+@processor_for(Ville_BarDuMonde)
+def processor_Ville_BarDuMonde(request,page):
+    try: 
+        ville = Ville_BarDuMonde.objects.get(title=page.title)
+        illustration = ville.illustration.url.split('/')
+        ville.illustration = illustration[-1]
+        bar_ville = BarDuMonde.objects.filter(ville=ville)
+        print(bar_ville)
+    except:
+        print('no result for this query')
+    return locals()
+
+@processor_for(BarDuMonde)
+def processor_AllBarDuMonde(request,page):
+    try: 
+        bar = BarDuMonde.objects.get(title=page.title)
+        illustration = bar.illustration.url.split('/')
+        bar.illustration = illustration[-1]
+    except:
+        print("QueryError")
+        pass
+    return locals()

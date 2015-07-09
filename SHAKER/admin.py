@@ -5,8 +5,6 @@ from django.contrib import admin
 from mezzanine.pages.admin import PageAdmin
 from mezzanine.pages.models import RichTextPage
 from .models import *
-from mezzanine.blog.admin import BlogPostAdmin
-from mezzanine.blog.models import BlogPost
 
 publicite_extra_fieldsets = (
                 (None,
@@ -18,14 +16,16 @@ publicite_extra_fieldsets = (
 class PubliciteAdmin(PageAdmin):
     fieldsets = deepcopy(PageAdmin.fieldsets) + publicite_extra_fieldsets
 
+
+class Ville_BarDuMondeAdmin(PageAdmin):
+    fieldsets = deepcopy(PageAdmin.fieldsets)
+
 bardumonde_extra_fieldsets = (
                 (None,
-                        {'fields': ('date_derniere_visite','ville','illustration','site_web','adresse','barman_vedette','cocktail','decoration')
+                        {'fields': ('date_derniere_visite','ville','illustration','site_web','facebook','twitter','adresse','barman_vedette','cocktail','decoration')
                         }
                 ),
         )
-
-
 class BarDuMondeAdmin(PageAdmin):
     fieldsets = deepcopy(PageAdmin.fieldsets) + bardumonde_extra_fieldsets
 
@@ -39,6 +39,7 @@ class BarDuMondeAdmin(PageAdmin):
 
 
 admin.site.register(Publicite, PubliciteAdmin)
+admin.site.register(Ville_BarDuMonde, Ville_BarDuMondeAdmin)
 admin.site.register(BarDuMonde, BarDuMondeAdmin)
 # admin.site.unregister(BlogPost)
 # admin.site.register(BlogPost, MyBlogPostAdmin)

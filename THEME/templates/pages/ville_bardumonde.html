@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n future mezzanine_tags blog_tags keyword_tags disqus_tags pages_tags staticfiles %}
+
+{% block main %}
+    <div class='col-md-12'>
+        <h2 class='text-center'>{{ ville }}</h2>
+        <div class='img_responsive_layer'>
+            <img class='img_responsive img-thumbnail' src='{{ MEDIA_URL }}{% thumbnail ville.illustration.url 800 200 %}' alt='illustration ville : {{ ville }}' />
+        </div>
+        <div>
+            {% for bar in bar_ville %}
+                <h4>{{ bar.title }}</h4>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

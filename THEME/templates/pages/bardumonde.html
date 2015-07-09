@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load i18n future mezzanine_tags blog_tags keyword_tags disqus_tags pages_tags staticfiles %}
+
+
+{% block extra_css %}
+    <style type="text/css">
+        h2{
+            padding: 10px;
+            background: #eebe66; /* Old browsers */
+            background: -moz-linear-gradient(top,  #eebe66 83%, #ecb668 100%); /* FF3.6+ */
+            background: -webkit-gradient(linear, left top, left bottom, color-stop(83%,#eebe66), color-stop(100%,#ecb668)); /* Chrome,Safari4+ */
+            background: -webkit-linear-gradient(top,  #eebe66 83%,#ecb668 100%); /* Chrome10+,Safari5.1+ */
+            background: -o-linear-gradient(top,  #eebe66 83%,#ecb668 100%); /* Opera 11.10+ */
+            background: -ms-linear-gradient(top,  #eebe66 83%,#ecb668 100%); /* IE10+ */
+            background: linear-gradient(to bottom,  #eebe66 83%,#ecb668 100%); /* W3C */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eebe66', endColorstr='#ecb668',GradientType=0 ); /* IE6-9 */
+
+            color: white;
+        }
+        #info_bar{
+            margin-top: 0px;
+        }
+        #info_bar .fa{
+            color: rgb(180,180,200);
+        }
+        #textFields{
+            margin-top: 50px;
+        }#textFields h4{
+            margin: 50px 0 30px 0;
+        }
+
+        #social{
+            position: absolute;
+            top: -80px;
+            right: 5px;
+            padding: 10px;
+            border-radius: 0 0 0 10px;
+            opacity: .8;
+            background-color: white;
+            -moz-transition: all 0.5s ease-out;
+            -webkit-transition: all 0.5s ease-out;
+            -o-transition: all 0.5s ease-out;
+            transition: all 0.5s ease-out;
+        }#social a{
+            color: rgb(244,176,39);
+        }
+        .img_responsive_layer:hover #social{
+            top: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+    <div class='col-md-12'>
+        <h2 class='text-center'>{{ bar.title }}</h2>
+        <div class='img_responsive_layer'>
+            <img class='img_responsive img-thumbnail' src='{{ MEDIA_URL }}{% thumbnail bar.illustration.url 800 200 %}' alt='illustration ville : {{ bar }}' />
+            <div id='social'>
+                {% if bar.site_web %}
+                <a href='{{ bar.site_web }}' target='blank'><i class='fa fa-2x fa-link'></i></a>
+                {% endif %}
+                {% if bar.facebook %}
+                <a href='{{ bar.facebook }}' target='blank'><i class='fa fa-2x fa-facebook'></i></a>
+                {% endif %}
+                {% if bar.twitter %}
+                <a href='{{ bar.twitter }}' target='blank'><i class='fa fa-2x fa-twitter'></i></a>
+                {% endif %}
+            </div>
+        </div>
+        <div id='info_bar'>
+            <div class='label label-warning'>Dernière visite: {% trans bar.date_derniere_visite %}</div>
+            <h5 class='pull-right text-muted'>{{ bar.adresse }}</h5>
+            <div id='textFields'>
+                <p>
+                    <h4 class='text-center'> <i class='fa fa-minus'></i> Barman vedette <i class='fa fa-minus'></i></h4>
+                    {{ bar.barman_vedette }}
+                </p>
+                <p>
+                    <h4 class='text-center'> <i class='fa fa-minus'></i> Cocktail <i class='fa fa-minus'></i></h4>
+                    {{ bar.cocktail }}
+                </p>
+                <p>
+                    <h4 class='text-center'> <i class='fa fa-minus'></i> Decoration <i class='fa fa-minus'></i></h4>
+                    {{ bar.decoration }}
+                </p>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,7 +1,9 @@
 @charset "UTF-8";
 /*
     grey -> rgb(130,130,160);
+    yellow -> rgb(244,176,39);
 */
+
 
 
 .container{
@@ -28,4 +30,11 @@
 .navbar-nav>li>a{
     padding-top: 20px;
     padding-bottom: 20px;
+}
+.navbar-default .navbar-nav>li>a{
+    color: #337ab7;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus{
+    background-color: rgba(244,176,39,.7);
+    color: white;
 }

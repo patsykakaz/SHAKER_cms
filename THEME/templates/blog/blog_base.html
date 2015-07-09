@@ -1,6 +1,14 @@
 {% extends "base.html" %}
 {% load i18n future mezzanine_tags blog_tags keyword_tags disqus_tags pages_tags staticfiles %}
 
+{% block extra_css %}
+<style type="text/css">
+    h2{
+        margin: 15px;
+    }
+</style>
+{% endblock %}
+
 {% block main %}
     {% block blog_main %}
     {% endblock %}

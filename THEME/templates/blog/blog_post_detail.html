@@ -23,23 +23,20 @@
 
 {% block main %}
 <div id='blog_detail'>
-{% block blog_post_detail_featured_image %}
-{% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
-<p>
-    <div class='img_responsive_layer'>
-        <img class="img-responsive img-thumbnail" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 800 200 %}">
-    </div>
-</p>
-{% endif %}
-{% endblock %}
+    <h2 class='text-center'> {{ blog_post.title|upper }}</h2>
+    {% block blog_post_detail_featured_image %}
+    {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
+    <p>
+        <div class='img_responsive_layer'>
+            <img class="img-responsive img-thumbnail" src="{{ MEDIA_URL }}{% thumbnail blog_post.featured_image 800 200 %}">
+        </div>
+    </p>
+    {% endif %}
+    {% endblock %}
 
-
-{% block blog_post_detail_content %}
-{% editable blog_post.content %}
-{{ blog_post.content|richtext_filters|safe }}
-{% endeditable %}
-{% endblock %}
-
+    {% block blog_post_detail_content %}
+    {{ blog_post.content|richtext_filters|safe }}
+    {% endblock %}
 </div>
 
     {% block blog_post_detail_keywords %}
