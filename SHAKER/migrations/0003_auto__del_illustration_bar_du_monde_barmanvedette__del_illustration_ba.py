@@ -8,29 +8,61 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Deleting model 'Illustration_Bar_du_Monde_barmanVedette'
+        db.delete_table(u'SHAKER_illustration_bar_du_monde_barmanvedette')
 
-        # Changing field 'BarDuMonde.site_web'
-        db.alter_column(u'SHAKER_bardumonde', 'site_web', self.gf('django.db.models.fields.URLField')(max_length=200, null=True))
-        # Deleting field 'Ville_BarDuMonde.lol'
-        db.delete_column(u'SHAKER_ville_bardumonde', 'lol')
+        # Deleting model 'Illustration_Bar_du_Monde_cocktail'
+        db.delete_table(u'SHAKER_illustration_bar_du_monde_cocktail')
 
-        # Adding field 'Ville_BarDuMonde.illustration'
-        db.add_column(u'SHAKER_ville_bardumonde', 'illustration',
-                      self.gf('django.db.models.fields.files.ImageField')(default=0, max_length=100),
-                      keep_default=False)
+        # Deleting model 'Illustration_Bar_du_Monde_deco'
+        db.delete_table(u'SHAKER_illustration_bar_du_monde_deco')
+
+        # Adding model 'IBDM_Decoration'
+        db.create_table(u'SHAKER_ibdm_decoration', (
+            (u'ibdm_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['SHAKER.IBDM'], unique=True, primary_key=True)),
+        ))
+        db.send_create_signal(u'SHAKER', ['IBDM_Decoration'])
+
+        # Adding model 'IBDM_BarmanVedette'
+        db.create_table(u'SHAKER_ibdm_barmanvedette', (
+            (u'ibdm_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['SHAKER.IBDM'], unique=True, primary_key=True)),
+        ))
+        db.send_create_signal(u'SHAKER', ['IBDM_BarmanVedette'])
+
+        # Adding model 'IBDM_Cocktail'
+        db.create_table(u'SHAKER_ibdm_cocktail', (
+            (u'ibdm_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['SHAKER.IBDM'], unique=True, primary_key=True)),
+        ))
+        db.send_create_signal(u'SHAKER', ['IBDM_Cocktail'])
 
 
     def backwards(self, orm):
+        # Adding model 'Illustration_Bar_du_Monde_barmanVedette'
+        db.create_table(u'SHAKER_illustration_bar_du_monde_barmanvedette', (
+            (u'ibdm_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['SHAKER.IBDM'], unique=True, primary_key=True)),
+        ))
+        db.send_create_signal(u'SHAKER', ['Illustration_Bar_du_Monde_barmanVedette'])
 
-        # Changing field 'BarDuMonde.site_web'
-        db.alter_column(u'SHAKER_bardumonde', 'site_web', self.gf('django.db.models.fields.URLField')(default=0, max_length=200))
-        # Adding field 'Ville_BarDuMonde.lol'
-        db.add_column(u'SHAKER_ville_bardumonde', 'lol',
-                      self.gf('django.db.models.fields.CharField')(default=0, max_length=100),
-                      keep_default=False)
+        # Adding model 'Illustration_Bar_du_Monde_cocktail'
+        db.create_table(u'SHAKER_illustration_bar_du_monde_cocktail', (
+            (u'ibdm_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['SHAKER.IBDM'], unique=True, primary_key=True)),
+        ))
+        db.send_create_signal(u'SHAKER', ['Illustration_Bar_du_Monde_cocktail'])
 
-        # Deleting field 'Ville_BarDuMonde.illustration'
-        db.delete_column(u'SHAKER_ville_bardumonde', 'illustration')
+        # Adding model 'Illustration_Bar_du_Monde_deco'
+        db.create_table(u'SHAKER_illustration_bar_du_monde_deco', (
+            (u'ibdm_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['SHAKER.IBDM'], unique=True, primary_key=True)),
+        ))
+        db.send_create_signal(u'SHAKER', ['Illustration_Bar_du_Monde_deco'])
+
+        # Deleting model 'IBDM_Decoration'
+        db.delete_table(u'SHAKER_ibdm_decoration')
+
+        # Deleting model 'IBDM_BarmanVedette'
+        db.delete_table(u'SHAKER_ibdm_barmanvedette')
+
+        # Deleting model 'IBDM_Cocktail'
+        db.delete_table(u'SHAKER_ibdm_cocktail')
 
 
     models = {
@@ -41,10 +73,31 @@ class Migration(SchemaMigration):
             'cocktail': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'date_derniere_visite': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'decoration': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'facebook': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'illustration': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
             u'page_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['pages.Page']", 'unique': 'True', 'primary_key': 'True'}),
             'site_web': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'twitter': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'ville': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['SHAKER.Ville_BarDuMonde']"})
+        },
+        u'SHAKER.ibdm': {
+            'Meta': {'object_name': 'IBDM'},
+            'bar': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['SHAKER.BarDuMonde']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'illustration': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
+            'legende': ('django.db.models.fields.CharField', [], {'max_length': '400', 'null': 'True', 'blank': 'True'})
+        },
+        u'SHAKER.ibdm_barmanvedette': {
+            'Meta': {'object_name': 'IBDM_BarmanVedette', '_ormbases': [u'SHAKER.IBDM']},
+            u'ibdm_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['SHAKER.IBDM']", 'unique': 'True', 'primary_key': 'True'})
+        },
+        u'SHAKER.ibdm_cocktail': {
+            'Meta': {'object_name': 'IBDM_Cocktail', '_ormbases': [u'SHAKER.IBDM']},
+            u'ibdm_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['SHAKER.IBDM']", 'unique': 'True', 'primary_key': 'True'})
+        },
+        u'SHAKER.ibdm_decoration': {
+            'Meta': {'object_name': 'IBDM_Decoration', '_ormbases': [u'SHAKER.IBDM']},
+            u'ibdm_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['SHAKER.IBDM']", 'unique': 'True', 'primary_key': 'True'})
         },
         u'SHAKER.publicite': {
             'Meta': {'ordering': "(u'_order',)", 'object_name': 'Publicite', '_ormbases': [u'pages.Page']},

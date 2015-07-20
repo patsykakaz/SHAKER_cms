@@ -7,12 +7,12 @@
     {% for blog_post in blog_posts.object_list %}
         {% if forloop.counter0 == 0 %}
         <a href="{{ blog_post.get_absolute_url }}">
-            <div class='col-md-8 item triple-item'>
+            <div class='col-md-8 item double-item'>
         {% else %}
         <a href="{{ blog_post.get_absolute_url }}">
             <div class='col-md-4 item
             {% if forloop.counter0 == 1 %} 
-                triple-item item-dark
+                double-item item-dark
             {% elif forloop.counter0|divisibleby:5 %}
                 double-item item-dark
             {% else %}
@@ -25,7 +25,14 @@
                         <img src='{{ MEDIA_URL }}{% if forloop.counter0 == 0 %}{%  thumbnail blog_post.featured_image 600 600 %}{% elif forloop.counter0 == 1 %}{%  thumbnail blog_post.featured_image 300 400 %}{% elif forloop.counter0|divisibleby:3 %}{%  thumbnail blog_post.featured_image 300 400 %}{% else %}{%  thumbnail blog_post.featured_image 300 400 %}{% endif %}' />
                     </div>
                     <div class='item-caption'>
-                        {{ blog_post.title }}
+                        <h5>{{ blog_post.title|truncatechars:30 }}</h5>
+                        {% if blog_post.baseline %}
+                            {% if forloop.counter0 == 0 %}
+                                <p>{{ blog_post.baseline|richtext_filters|safe|truncatechars:60 }}</p>
+                            {% else %}
+                                <p>{{ blog_post.baseline|richtext_filters|safe|truncatechars:30 }}</p>
+                            {% endif %}
+                        {% endif %}
                     </div>
                     <div class='arrow'></div>
                 </div>

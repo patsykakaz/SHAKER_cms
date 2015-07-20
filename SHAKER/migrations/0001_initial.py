@@ -19,8 +19,8 @@ class Migration(SchemaMigration):
 
         # Adding model 'Ville_BarDuMonde'
         db.create_table(u'SHAKER_ville_bardumonde', (
-            (u'richtextpage_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['pages.RichTextPage'], unique=True, primary_key=True)),
-            ('lol', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            (u'page_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['pages.Page'], unique=True, primary_key=True)),
+            ('illustration', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
         ))
         db.send_create_signal(u'SHAKER', ['Ville_BarDuMonde'])
 
@@ -30,13 +30,42 @@ class Migration(SchemaMigration):
             ('ville', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['SHAKER.Ville_BarDuMonde'])),
             ('date_derniere_visite', self.gf('django.db.models.fields.DateField')(null=True, blank=True)),
             ('illustration', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
-            ('site_web', self.gf('django.db.models.fields.URLField')(max_length=200)),
+            ('site_web', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True)),
+            ('facebook', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True)),
+            ('twitter', self.gf('django.db.models.fields.URLField')(max_length=200, null=True, blank=True)),
             ('adresse', self.gf('django.db.models.fields.CharField')(max_length=200, null=True)),
             ('barman_vedette', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('cocktail', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
             ('decoration', self.gf('django.db.models.fields.TextField')(null=True, blank=True)),
         ))
         db.send_create_signal(u'SHAKER', ['BarDuMonde'])
+
+        # Adding model 'Illustration_BDM'
+        db.create_table(u'SHAKER_illustration_bdm', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('bar', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['SHAKER.BarDuMonde'])),
+            ('illustration', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
+            ('legende', self.gf('django.db.models.fields.CharField')(max_length=400, null=True, blank=True)),
+        ))
+        db.send_create_signal(u'SHAKER', ['Illustration_BDM'])
+
+        # Adding model 'IBDM_barmanVedette'
+        db.create_table(u'SHAKER_ibdm_barmanvedette', (
+            (u'illustration_bdm_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['SHAKER.Illustration_BDM'], unique=True, primary_key=True)),
+        ))
+        db.send_create_signal(u'SHAKER', ['IBDM_barmanVedette'])
+
+        # Adding model 'IBDM_cocktail'
+        db.create_table(u'SHAKER_ibdm_cocktail', (
+            (u'illustration_bdm_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['SHAKER.Illustration_BDM'], unique=True, primary_key=True)),
+        ))
+        db.send_create_signal(u'SHAKER', ['IBDM_cocktail'])
+
+        # Adding model 'IBDM_deco'
+        db.create_table(u'SHAKER_ibdm_deco', (
+            (u'illustration_bdm_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['SHAKER.Illustration_BDM'], unique=True, primary_key=True)),
+        ))
+        db.send_create_signal(u'SHAKER', ['IBDM_deco'])
 
 
     def backwards(self, orm):
@@ -49,6 +78,18 @@ class Migration(SchemaMigration):
         # Deleting model 'BarDuMonde'
         db.delete_table(u'SHAKER_bardumonde')
 
+        # Deleting model 'Illustration_BDM'
+        db.delete_table(u'SHAKER_illustration_bdm')
+
+        # Deleting model 'IBDM_barmanVedette'
+        db.delete_table(u'SHAKER_ibdm_barmanvedette')
+
+        # Deleting model 'IBDM_cocktail'
+        db.delete_table(u'SHAKER_ibdm_cocktail')
+
+        # Deleting model 'IBDM_deco'
+        db.delete_table(u'SHAKER_ibdm_deco')
+
 
     models = {
         u'SHAKER.bardumonde': {
@@ -58,10 +99,31 @@ class Migration(SchemaMigration):
             'cocktail': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
             'date_derniere_visite': ('django.db.models.fields.DateField', [], {'null': 'True', 'blank': 'True'}),
             'decoration': ('django.db.models.fields.TextField', [], {'null': 'True', 'blank': 'True'}),
+            'facebook': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'illustration': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
             u'page_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['pages.Page']", 'unique': 'True', 'primary_key': 'True'}),
-            'site_web': ('django.db.models.fields.URLField', [], {'max_length': '200'}),
+            'site_web': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
+            'twitter': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'ville': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['SHAKER.Ville_BarDuMonde']"})
+        },
+        u'SHAKER.ibdm_barmanvedette': {
+            'Meta': {'object_name': 'IBDM_barmanVedette', '_ormbases': [u'SHAKER.Illustration_BDM']},
+            u'illustration_bdm_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['SHAKER.Illustration_BDM']", 'unique': 'True', 'primary_key': 'True'})
+        },
+        u'SHAKER.ibdm_cocktail': {
+            'Meta': {'object_name': 'IBDM_cocktail', '_ormbases': [u'SHAKER.Illustration_BDM']},
+            u'illustration_bdm_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['SHAKER.Illustration_BDM']", 'unique': 'True', 'primary_key': 'True'})
+        },
+        u'SHAKER.ibdm_deco': {
+            'Meta': {'object_name': 'IBDM_deco', '_ormbases': [u'SHAKER.Illustration_BDM']},
+            u'illustration_bdm_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['SHAKER.Illustration_BDM']", 'unique': 'True', 'primary_key': 'True'})
+        },
+        u'SHAKER.illustration_bdm': {
+            'Meta': {'object_name': 'Illustration_BDM'},
+            'bar': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['SHAKER.BarDuMonde']"}),
+            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'illustration': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
+            'legende': ('django.db.models.fields.CharField', [], {'max_length': '400', 'null': 'True', 'blank': 'True'})
         },
         u'SHAKER.publicite': {
             'Meta': {'ordering': "(u'_order',)", 'object_name': 'Publicite', '_ormbases': [u'pages.Page']},
@@ -71,9 +133,9 @@ class Migration(SchemaMigration):
             u'page_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['pages.Page']", 'unique': 'True', 'primary_key': 'True'})
         },
         u'SHAKER.ville_bardumonde': {
-            'Meta': {'ordering': "(u'_order',)", 'object_name': 'Ville_BarDuMonde', '_ormbases': [u'pages.RichTextPage']},
-            'lol': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
-            u'richtextpage_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['pages.RichTextPage']", 'unique': 'True', 'primary_key': 'True'})
+            'Meta': {'ordering': "(u'_order',)", 'object_name': 'Ville_BarDuMonde', '_ormbases': [u'pages.Page']},
+            'illustration': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
+            u'page_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['pages.Page']", 'unique': 'True', 'primary_key': 'True'})
         },
         u'pages.page': {
             'Meta': {'ordering': "(u'titles',)", 'object_name': 'Page'},
@@ -98,11 +160,6 @@ class Migration(SchemaMigration):
             'title': ('django.db.models.fields.CharField', [], {'max_length': '500'}),
             'titles': ('django.db.models.fields.CharField', [], {'max_length': '1000', 'null': 'True'}),
             'updated': ('django.db.models.fields.DateTimeField', [], {'null': 'True'})
-        },
-        u'pages.richtextpage': {
-            'Meta': {'ordering': "(u'_order',)", 'object_name': 'RichTextPage', '_ormbases': [u'pages.Page']},
-            'content': ('mezzanine.core.fields.RichTextField', [], {}),
-            u'page_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['pages.Page']", 'unique': 'True', 'primary_key': 'True'})
         },
         u'sites.site': {
             'Meta': {'ordering': "(u'domain',)", 'object_name': 'Site', 'db_table': "u'django_site'"},

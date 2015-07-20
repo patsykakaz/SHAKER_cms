@@ -13,6 +13,11 @@ $(window).load(function(){
         }
     });
 
+    $('#mask_main').css('opacity','0');
+    setTimeout(function(){
+        $('#mask_main').remove();
+    },500);
+
     $('#test').click(function(){
         $('#test-click').toggleClass('hide');
     });

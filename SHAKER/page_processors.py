@@ -15,7 +15,7 @@ def processor_home(request,page):
         last_bar_du_monde = BarDuMonde.objects.latest('date_derniere_visite')
         couv = last_bar_du_monde.illustration.url.split('/')
         last_bar_du_monde.illustration = couv[-1]
-    except DoesNotExist:
+    except:
         print('FUCK')
         print('no BlogPost or BarDuMondex')
     return locals()
@@ -34,11 +34,19 @@ def processor_Ville_BarDuMonde(request,page):
 
 @processor_for(BarDuMonde)
 def processor_AllBarDuMonde(request,page):
-    try: 
-        bar = BarDuMonde.objects.get(title=page.title)
+    try:
+        bar = BarDuMonde.objects.filter(title=page.title)
+        bar = bar[0]
         illustration = bar.illustration.url.split('/')
         bar.illustration = illustration[-1]
+        # TODO: override save() for img.url
+        barPics = IBDM.objects.filter(bar=bar)
     except:
         print("QueryError")
         pass
     return locals()
+
+
+
+
+

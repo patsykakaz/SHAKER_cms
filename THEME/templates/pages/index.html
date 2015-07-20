@@ -2,6 +2,11 @@
 {% load i18n future mezzanine_tags blog_tags keyword_tags disqus_tags pages_tags staticfiles %}
 
 {% block main %}
+
+
+    {% if user.is_authenticated %}
+    {% endif %}
+    
     {% for blog_post in blog_post_list %}
     {% if  forloop.counter == 1 %}
         <a href="{{ blog_post.get_absolute_url }}">
@@ -11,7 +16,10 @@
                         <img src='{{ MEDIA_URL }}{%  thumbnail blog_post.featured_image 550 550 %}' />
                     </div>
                     <div class='item-caption'>
-                        {{ blog_post.title }}
+                        <h3>{{ blog_post.title|truncatechars:50 }}</h3>
+                        {% if blog_post.baseline %}
+                            <p>{{ blog_post.baseline|richtext_filters|safe|truncatechars:70 }}</p>
+                        {% endif %}
                     </div>
                     <div class='arrow'></div>
                 </div>
@@ -67,7 +75,10 @@
                          <img src='{{ MEDIA_URL }}{%  thumbnail blog_post.featured_image 300 400 %}' />
                     </div>
                     <div class='item-caption'>
-                        {{ blog_post.title }}
+                        <h5>{{ blog_post.title|truncatechars:30 }}</h5>
+                        {% if blog_post.baseline %}
+                            <p>{{ blog_post.baseline|richtext_filters|safe|truncatechars:40 }}</p>
+                        {% endif %}
                     </div>
                     <div class='arrow'></div>
                 </div>
@@ -81,5 +92,3 @@
     {% endif %}
     {% endfor %}
 {% endblock %}
-
-

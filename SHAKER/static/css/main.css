@@ -63,7 +63,6 @@ h1,h2,h3,h4,h5,h6{
     line-height: 25px;
     letter-spacing: 1px;
 }
-
 #main img{
     display: block;
     max-width: 100%;
@@ -72,6 +71,20 @@ h1,h2,h3,h4,h5,h6{
     margin: auto;
 }#main .layer-img img{
     padding: 0;
+}
+#mask_main{
+    position: absolute;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(235,235,238);
+    opacity: .9;
+    -moz-transition: all 0.5s ease;
+    -webkit-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
 }
 
 .item{
@@ -135,6 +148,9 @@ h1,h2,h3,h4,h5,h6{
     background-color: rgba(255,255,255,.7);
     /*color: rgb(130,130,160);*/
     color: white;
+    -moz-transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
 }.pubOn .item-secondary-layer{
     position: absolute;
@@ -143,6 +159,9 @@ h1,h2,h3,h4,h5,h6{
     width: 100%;
     background-color: rgba(255,255,255,.8);
     color: rgb(130,130,160);
+    -moz-transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
 }
 
@@ -186,6 +205,9 @@ h1,h2,h3,h4,h5,h6{
     position: relative;
     min-width: 100%;
     min-height: 100%;
+    -moz-transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
     transition: all .3s ease-in-out;
 }
 .item:hover .layer-img img{
@@ -221,12 +243,19 @@ h1,h2,h3,h4,h5,h6{
     z-index: 9;
     height: 150px;
     padding: 25px;
+    line-height: 16px;
+    font-size: 13px;
+}.item-caption h3{
+    margin: 5px;
 }
 
 .secondary-caption i{
     position: relative;
     top: 4px;
     left: 0px;
+    -moz-transition: all .75s linear;
+    -webkit-transition: all .75s linear;
+    -o-transition: all .75s linear;
     transition: all .75s linear;
 }
 
@@ -238,6 +267,9 @@ h1,h2,h3,h4,h5,h6{
     height: 20px;
     background-image: url('../img/white-arrow.png');
     background-repeat: no-repeat;
+    -moz-transition: all .2s linear;
+    -webkit-transition: all .2s linear;
+    -o-transition: all .2s linear;
     transition: all .2s linear;
 }
 .pubOff .arrow{
@@ -251,6 +283,9 @@ h1,h2,h3,h4,h5,h6{
 }
 .item:hover .arrow{
     left: -100px;
+    -moz-transition: all .5s linear;
+    -webkit-transition: all .5s linear;
+    -o-transition: all .5s linear;
     transition: all .5s linear;
 }
 

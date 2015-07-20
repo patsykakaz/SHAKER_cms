@@ -6,16 +6,6 @@
     <style type="text/css">
         h2{
             padding: 10px;
-            background: #eebe66; /* Old browsers */
-            background: -moz-linear-gradient(top,  #eebe66 83%, #ecb668 100%); /* FF3.6+ */
-            background: -webkit-gradient(linear, left top, left bottom, color-stop(83%,#eebe66), color-stop(100%,#ecb668)); /* Chrome,Safari4+ */
-            background: -webkit-linear-gradient(top,  #eebe66 83%,#ecb668 100%); /* Chrome10+,Safari5.1+ */
-            background: -o-linear-gradient(top,  #eebe66 83%,#ecb668 100%); /* Opera 11.10+ */
-            background: -ms-linear-gradient(top,  #eebe66 83%,#ecb668 100%); /* IE10+ */
-            background: linear-gradient(to bottom,  #eebe66 83%,#ecb668 100%); /* W3C */
-            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eebe66', endColorstr='#ecb668',GradientType=0 ); /* IE6-9 */
-
-            color: white;
         }
         #info_bar{
             margin-top: 0px;
@@ -74,6 +64,10 @@
                 <p>
                     <h4 class='text-center'> <i class='fa fa-minus'></i> Barman vedette <i class='fa fa-minus'></i></h4>
                     {{ bar.barman_vedette }}
+                    {% for barPic in barPics %}
+                        <script type="text/javascript">alert('{{barPic.illustration.url}}');</script>
+                        <img class='img_responsive img-thumbnail' src='{{ MEDIA_URL }}bar_du_monde/{% thumbnail barPic.illustration.url 800 200 %}' alt='illustration ville : {{ bar }}' />
+                    {% endfor %}
                 </p>
                 <p>
                     <h4 class='text-center'> <i class='fa fa-minus'></i> Cocktail <i class='fa fa-minus'></i></h4>
